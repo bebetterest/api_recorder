@@ -1,0 +1,11 @@
+name: api_recorder
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - -e .
+      - pytest>=8.3,<9.0
+      - pytest-asyncio>=0.26,<1.0
+

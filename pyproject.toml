@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "api-recorder"
+version = "0.1.0"
+description = "Local API proxy and recorder for AI tool traffic."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "Codex" }]
+dependencies = [
+  "fastapi>=0.115,<1.0",
+  "httpx>=0.28,<1.0",
+  "pydantic>=2.11,<3.0",
+  "tomli-w>=1.2,<2.0",
+  "typer>=0.16,<1.0",
+  "uvicorn>=0.35,<1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3,<9.0",
+  "pytest-asyncio>=0.26,<1.0",
+]
+
+[project.scripts]
+api-recorder = "api_recorder.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
