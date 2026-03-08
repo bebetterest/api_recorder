@@ -6,6 +6,7 @@
 
 ## 已完成
 
+- 已在 README 中补充 Gemini 独立中转 upstream 的配置方法，以及通过 `/proxy/gemini/...` 调用的示例。
 - 从空仓库搭建了可编辑安装的 Python 项目骨架。
 - 添加了 conda 环境定义 `environment.yml`。
 - 增加了仓库内置假上游示例 `examples/fake_upstream.py`，用于本地手工联调。
@@ -21,6 +22,7 @@
 
 ## 验证情况
 
+- 本次仅更新文档，没有改动代码路径，因此未增加新的运行时验证。
 - `conda run -n api_recorder python -m pytest`
   - 结果：通过（`6` 个通过，`1` 个 live test 被跳过）
 - 已在 `api_recorder` 环境中检查 CLI 帮助和命令面。

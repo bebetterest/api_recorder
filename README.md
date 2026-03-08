@@ -69,6 +69,43 @@ Proxy traffic through the configured route:
 curl http://127.0.0.1:8000/proxy/openai/chat/completions
 ```
 
+### Example: call Gemini through a relay upstream
+
+If Gemini is exposed through a relay base URL, add it as its own upstream:
+
+```bash
+export GEMINI_API_KEY=your-secret
+
+api-recorder upstream add \
+  --name gemini \
+  --route-prefix gemini \
+  --base-url https://your-gemini-relay.example/v1beta \
+  --auth-env GEMINI_API_KEY
+```
+
+Then call the local proxy with the Gemini path appended after `/proxy/gemini/`:
+
+```bash
+curl \
+  -X POST 'http://127.0.0.1:8000/proxy/gemini/models/gemini-2.0-flash:generateContent' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "contents": [
+      {
+        "parts": [
+          { "text": "Hello" }
+        ]
+      }
+    ]
+  }'
+```
+
+That request is forwarded to:
+
+```text
+https://your-gemini-relay.example/v1beta/models/gemini-2.0-flash:generateContent
+```
+
 ## Full local walkthrough
 
 This repository includes a bundled fake upstream app at [examples/fake_upstream.py](examples/fake_upstream.py), which is useful for validating the proxy end to end without calling a real vendor API.

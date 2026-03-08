@@ -69,6 +69,43 @@ api-recorder stop
 curl http://127.0.0.1:8000/proxy/openai/chat/completions
 ```
 
+### 示例：通过中转 upstream 调用 Gemini
+
+如果 Gemini 需要走第三方中转地址，就把这个中转地址配置成一个独立 upstream：
+
+```bash
+export GEMINI_API_KEY=your-secret
+
+api-recorder upstream add \
+  --name gemini \
+  --route-prefix gemini \
+  --base-url https://your-gemini-relay.example/v1beta \
+  --auth-env GEMINI_API_KEY
+```
+
+之后在本地代理地址后拼接 `/proxy/gemini/` 和 Gemini 原始接口路径即可：
+
+```bash
+curl \
+  -X POST 'http://127.0.0.1:8000/proxy/gemini/models/gemini-2.0-flash:generateContent' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "contents": [
+      {
+        "parts": [
+          { "text": "Hello" }
+        ]
+      }
+    ]
+  }'
+```
+
+这条请求最终会被转发到：
+
+```text
+https://your-gemini-relay.example/v1beta/models/gemini-2.0-flash:generateContent
+```
+
 ## 完整本地演示
 
 仓库内置了一个假上游服务 [examples/fake_upstream.py](examples/fake_upstream.py)。你可以不用真实厂商 API，直接完成一整套本地中转、记录、统计和导出验证。

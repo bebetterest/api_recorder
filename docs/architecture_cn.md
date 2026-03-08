@@ -10,6 +10,7 @@
 - 配置真源：TOML 文件
 - 存储：按日分片的 JSONL
 - 路由方式：`/proxy/<route_prefix>/...`
+- 每个 upstream 都可以指向不同厂商或中转 base URL；例如 `/proxy/gemini/...` 可以转发到以 `/v1beta` 为根路径的 Gemini 中转地址。
 - 限流方式：按 upstream 的并发门控和有界排队
 - 发往上游的 HTTP 客户端使用 `trust_env=False`，不会被系统代理环境变量改写转发路径。
 - 本地化：CLI 支持中英文输出

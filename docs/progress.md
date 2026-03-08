@@ -6,6 +6,7 @@ Current milestone: initial v1 implementation is complete at the code and repo le
 
 ## Completed
 
+- Added README guidance for configuring a dedicated Gemini relay upstream and calling it through `/proxy/gemini/...`.
 - Project scaffolded from an empty repository with editable Python packaging.
 - Conda environment definition added in `environment.yml`.
 - Bundled fake upstream demo app added in `examples/fake_upstream.py` for local manual verification.
@@ -21,6 +22,7 @@ Current milestone: initial v1 implementation is complete at the code and repo le
 
 ## Verification
 
+- Documentation update only; no code path changed and no additional runtime verification was required.
 - `conda run -n api_recorder python -m pytest`
   - Result: passing (`6` passed, `1` skipped live test)
 - CLI help and command surface checked in the `api_recorder` environment.

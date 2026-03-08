@@ -10,6 +10,7 @@
 - Config source of truth: TOML file
 - Storage: daily JSONL shards under the configured output directory
 - Routing: `/proxy/<route_prefix>/...`
+- Each upstream can point at a different vendor or relay base URL; for example, `/proxy/gemini/...` can forward to a Gemini relay rooted at `/v1beta`.
 - Limits: per-upstream concurrency gate with bounded queue
 - Outbound upstream HTTP clients run with `trust_env=False`, so system proxy environment variables do not rewrite proxy-to-upstream traffic.
 - Localization: English and Chinese CLI output
